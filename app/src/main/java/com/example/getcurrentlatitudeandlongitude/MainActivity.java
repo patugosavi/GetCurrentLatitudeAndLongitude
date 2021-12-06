@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -35,15 +36,17 @@ public class MainActivity extends AppCompatActivity {
         locationaddress = (TextView)findViewById(R.id.address);
         btngetlocation=(Button) findViewById(R.id.getlocation);
 
+        startService(new Intent(getApplicationContext(),MyService.class));
+
         final Handler someHandler = new Handler(getMainLooper());
         someHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 getLocation();
 
-                someHandler.postDelayed(this, 1000);
+                someHandler.postDelayed(this, 9000);
             }
-        }, 10);
+        }, 90);
 
         try {
             if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
